@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>街区地图</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav data-bind="attr:{class: classNameNav}" id="nav-list">
+    <div class="relative">
+        <h3>街机地图</h3>
+        <div data-bind="click: hideNav" class="icon-nav" id="icon-nav">
+            <ul>
+                <li class="icon-li"></li>
+                <li class="icon-li"></li>
+                <li class="icon-li"></li>
+                <li class="icon-li"></li>
+            </ul>
+        </div>
+    </div>
+    <input type="text" name="address" class="input-text" data-bind="value: slectPos,valueUpdate: 'afterkeydown'">
+    <ul data-bind="foreach: pos">
+        <li class="pos-li" data-bind="click:$parent.clickMark,text:name"></li>
+    </ul>
+</nav>
+<div data-bind="attr:{class: classNameMap}"  id="map-content">
+    <div class="icon-nav" data-bind="click: showNav">
+        <ul>
+            <li class="icon-li"></li>
+            <li class="icon-li"></li>
+            <li class="icon-li"></li>
+            <li class="icon-li"></li>
+        </ul>
+    </div>
+    <div id="map" class="map">
+
+    </div>
+</div>
+    <script src="js/lib/knockout.js"></script>
+    <script src="js/lib/axios.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbii2sA_3PHnC1V_Q8Fa3JPt4RdL5g7pA&callback=initMap"
+            async defer></script>
+</body>
+</html>
