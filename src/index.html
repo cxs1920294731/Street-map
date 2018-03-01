@@ -39,9 +39,10 @@
 </div>
     <script src="js/lib/knockout.js"></script>
     <script src="js/lib/axios.js"></script>
+    <script src="js/lib/jquery.js"></script>
     <script src="js/map.js"></script>
     <script src="js/app.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbii2sA_3PHnC1V_Q8Fa3JPt4RdL5g7pA&callback=initMap"
-            async defer></script>
+            async defer onerror="mapErrorHandle()"></script>
 </body>
 </html>

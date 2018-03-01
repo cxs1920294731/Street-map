@@ -1,44 +1,57 @@
 var map;
-var positionArray=[
-    {
-        uluru:{
-            lat: 23.117,
-            lng: 113.275,
+// var positionArray=[
+//     {
+//         uluru:{
+//             lat: 23.117,
+//             lng: 113.275,
+//         },
+//         name:'广州',
+//         mark:null,
+//     },
+//     {
+//         uluru:{
+//             lat: 22.5,
+//             lng: 114.0,
+//         },
+//         name:'深圳',
+//         mark:null,
+//     }, {
+//         uluru:{
+//             lat: 22.4,
+//             lng: 114.1,
+//         },
+//         name:'香港',
+//         mark:null,
+//     },{
+//         uluru:{
+//             lat: 23.0,
+//             lng: 113.7,
+//         },
+//         name:'东莞',
+//         mark:null,
+//     },{
+//         uluru:{
+//             lat: 23.1,
+//             lng: 114.4,
+//         },
+//         name:'惠州',
+//         mark:null,
+//     }
+// ];
+var positionArray=[];
+(function() {
+    $.ajax({
+        type:'GET',
+        url: 'js/Position.json',
+        dataType:'json',
+        success:function (res) {
+            positionArray=res;
         },
-        name:'广州',
-        mark:null,
-    },
-    {
-        uluru:{
-            lat: 22.5,
-            lng: 114.0,
-        },
-        name:'深圳',
-        mark:null,
-    }, {
-        uluru:{
-            lat: 22.4,
-            lng: 114.1,
-        },
-        name:'香港',
-        mark:null,
-    },{
-        uluru:{
-            lat: 23.0,
-            lng: 113.7,
-        },
-        name:'东莞',
-        mark:null,
-    },{
-        uluru:{
-            lat: 23.1,
-            lng: 114.4,
-        },
-        name:'惠州',
-        mark:null,
-    }
-];
-
+        error: function (es) {
+            console.log(es.status +' '+es.statusText);
+        }
+    });
+})();
 function initMap() {
     var center = {
         lat: 22.5,
@@ -67,6 +80,7 @@ var initMark= function(pos) {
             markAnimation(self);
         });
         val.mark=mark;
+        
     })
 };
 var markAnimation= function (mark) {
@@ -83,10 +97,12 @@ var clearMark=function () {
 var findPos=function (name) {
     var res=[];
     if (name == '' || name == null){
-        setTimeout(function () {
+        try{
             clearMark();
             initMark(positionArray);
-        });
+        }catch (err){
+
+        }
          res=positionArray;
     }else {
         positionArray.forEach(function (val) {
@@ -110,7 +126,7 @@ var requestApi= function (uluru,mark,map) {
     axios.get(requestUrl)
         .then(function (res) {
             console.log(res);
-            address = res.data.response.venues[0].location.city;
+            address = res.data.response.venues[0].name;
             console.log(address);
             var infowindow = new google.maps.InfoWindow({
                 content: address,
@@ -121,6 +137,9 @@ var requestApi= function (uluru,mark,map) {
             },3000)
         })
         .catch(function(err){
-            alert( + err);
+            alert(err);
         });
 };
+function mapErrorHandle() {
+    alert("地图加载错误");
+}

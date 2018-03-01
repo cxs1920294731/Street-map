@@ -20,6 +20,9 @@ function moveFile(){
     gulp.src('node_modules/axios/dist/axios.min.js')
         .pipe(rename('axios.js'))
         .pipe(gulp.dest('dist/js/lib'));
+    gulp.src('node_modules/jquery/dist/jquery.js')
+        .pipe(rename("jquery.js"))
+        .pipe(gulp.dest('dist/js/lib'));
     gulp.src('src/**')
         .pipe(gulp.dest('dist'));
 }
@@ -31,12 +34,10 @@ gulp.task('server', ['file'], function(){
         livereload: true
     })
     opn('http://127.0.0.1:8000');
-})
-
+});
 gulp.task('watch', function(){
     gulp.watch(['src/**'], ['reload']);
-})
-
+});
 gulp.task('reload', ['file'], function(){
     console.log('----------------reload server %s---------------------', new Date());
     gulp.src('dist/**').pipe(connect.reload());

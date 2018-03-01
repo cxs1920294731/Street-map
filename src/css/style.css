@@ -49,6 +49,7 @@ li{
     right: 20px;
     margin-top: -8px;
     width: 20px;
+    cursor: pointer;
 }
 .icon-nav .icon-li{
     margin-top: 2px;
@@ -96,7 +97,11 @@ li{
     top: 16px;
     left: 135px;
     margin-top: 0;
+    background-color: #ffffff;
     cursor: pointer;
+}
+.map-content.hide .icon-nav{
+    display: block;
 }
 .map-content .icon-nav .icon-li{
     background-color: black;
